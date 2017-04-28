@@ -1,38 +1,33 @@
 package drawing.view;
 
 import javax.swing.JFrame;
-import drawing.view.DrawingPanel;
 import drawing.controller.DrawingController;
-import java.awt.Dimension;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
 public class DrawingFrame extends JFrame
 {
 	private DrawingController baseController;
-	private DrawingPanel DrawingPanel;
+	private DrawingFrame baseFrame;
+	private DrawingPanel drawingPanel;
+	private ShapePanel shapePanel;
 	
 	public DrawingFrame(DrawingController baseController)
 	{
 		super();
 		this.baseController = baseController;
-		this.DrawingPanel = new DrawingPanel(baseController);
+		drawingPanel = new DrawingPanel(baseController);
+//		shapePanel = new ShapePanel(baseController);
 		setupFrame();
 	}
+	
 	private void setupFrame()
 	{
-		this.setContentPane(DrawingPanel);
-		this.setSize(new Dimension (900, 600));
-		this.setTitle("The Simple Games");
-		this.setSize(new Dimension(900, 600));
-		this.setLocationRelativeTo(null);
-		this.setVisible(true);
-	}
-	
-	public DrawingPanel getdrawingPanel()
-	{
-		return DrawingPanel;
-	}
-	
-	public void setDrawingPane(DrawingPanel DrawingPanel)
-	{
-		this.DrawingPanel = DrawingPanel;
+		this.setContentPane(drawingPanel);
+		this.setTitle("Drawing with Java");
+		this.setSize(new Dimension(900,600));
+		this.setResizable(true);
+		this.setVisible(true);	
 	}
 }

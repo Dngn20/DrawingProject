@@ -2,16 +2,18 @@ package drawing.controller;
 
 import drawing.view.*;
 
-public class DrawingController 
+public class DrawingController
 {
+	
 	private DrawingFrame baseFrame;
+	
+	public DrawingController()
+	{
+		baseFrame = new DrawingFrame(this);
+	}
+	
 	public void start()
 	{
 		
-	}
-	
-	public DrawingFrame getBaseFrame()
-	{
-		return baseFrame;
 	}
 }

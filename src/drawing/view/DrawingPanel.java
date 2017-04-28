@@ -1,81 +1,135 @@
 package drawing.view;
 
+import javax.swing.*;
+import drawing.controller.DrawingController;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-
-import drawing.controller.DrawingController;
-
-
+import java.awt.event.*;
 
 public class DrawingPanel extends JPanel
 {
 	private DrawingController baseController;
 	private ShapePanel shapePanel;
+	private DrawingFrame baseFrame;
 	private SpringLayout baseLayout;
-	private JButton button1;
+	private JButton rectButton;
+	private JButton circButton;
+	private JButton elliButton;
+	private JButton triButton;
+	private JButton polyButton;
+	private JButton resetButton;
+	private JButton saveButton;
+	private JButton randomArrayButton;
+	private JLabel title;
+	
 	public DrawingPanel(DrawingController baseController)
 	{
 		super();
 		this.baseController = baseController;
+		this.shapePanel = new ShapePanel(baseController);
 		this.baseLayout = new SpringLayout();
-		
-		shapePanel = new ShapePanel(baseController);
-		
-		this.button1 = new JButton("Draw rectangles");
-		baseLayout.putConstraint(SpringLayout.NORTH, button1, 44, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, button1, 22, SpringLayout.WEST, this);
-		
+		this.title = new JLabel("Making art!");
+		this.rectButton = new JButton("Draw [] Rectangles");
+		this.circButton = new JButton("Draw o Circles");
+		this.elliButton = new JButton("Draw 0 Ellipses");
+		this.triButton = new JButton("Draw  Triangles");
+		this.polyButton = new JButton("Draw Polygons");
+		this.resetButton = new JButton(" Here to Reset");
+
+
+
+
 		setupPanel();
 		setupLayout();
 		setupListeners();
 	}
 	
-	private void setupPanel()
+	public void setupPanel()
 	{
 		this.setLayout(baseLayout);
-		this.add(button1);
-		this.setBackground(Color.GREEN);
-		this.setMinimumSize(new Dimension(600, 600));
+		this.setPreferredSize(new Dimension(900,600));
+		this.setBackground(Color.gray);
 		
+		title.setFont(new Font("Impact", Font.PLAIN, 40));
 		this.add(shapePanel);
+		this.add(rectButton);
+		this.add(circButton);
+		this.add(elliButton);
+		this.add(triButton);
+		this.add(polyButton);
+		this.add(resetButton);
+		this.add(title);
 	}
-
-
+	
 	public void setupLayout()
 	{
-		baseLayout.putConstraint(SpringLayout.NORTH, shapePanel, 30, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, shapePanel, 240, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, shapePanel, 262, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.EAST, shapePanel, 382, SpringLayout.WEST, this);
-		
-	
+		baseLayout.putConstraint(SpringLayout.NORTH, shapePanel, 0, SpringLayout.NORTH, title);
+		baseLayout.putConstraint(SpringLayout.NORTH, title, 10, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, title, 20, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.EAST, shapePanel, -10, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, polyButton, 318, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, triButton, 0, SpringLayout.WEST, polyButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, triButton, -22, SpringLayout.NORTH, polyButton);
+		baseLayout.putConstraint(SpringLayout.WEST, polyButton, 0, SpringLayout.WEST, title);
+		baseLayout.putConstraint(SpringLayout.WEST, rectButton, 0, SpringLayout.WEST, circButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, rectButton, -20, SpringLayout.NORTH, circButton);
+		baseLayout.putConstraint(SpringLayout.WEST, circButton, 0, SpringLayout.WEST, elliButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, circButton, -24, SpringLayout.NORTH, elliButton);
+		baseLayout.putConstraint(SpringLayout.WEST, elliButton, 0, SpringLayout.WEST, triButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, elliButton, -23, SpringLayout.NORTH, triButton);
+		baseLayout.putConstraint(SpringLayout.WEST, resetButton, 0, SpringLayout.WEST, rectButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, resetButton, -10, SpringLayout.SOUTH, this);
 	}
-	public void setupListeners()
 	
+	public void setupListeners()
 	{
-		button1.addActionListener(new ActionListener()
+		rectButton.addActionListener(new ActionListener()
 		{
-			public void actionPerformed(ActionEvent Click)
+			public void actionPerformed(ActionEvent click)
 			{
 				shapePanel.addRectangles();
 			}
-			
-			
+		});
+		
+		circButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				shapePanel.addCircles();
+			}
+		});
+		
+		elliButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				shapePanel.addEllipses();
+			}
+		});
+		
+		triButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				shapePanel.addTriangles();
+			}
+		});
+		
+		polyButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				shapePanel.addPolygons();
+			}
+		});
+		
+		resetButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				shapePanel.reset();
+			}
 		});
 	}
 }
-	
-	
-
-
-
-
-
