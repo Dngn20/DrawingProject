@@ -2,13 +2,8 @@ package drawing.view;
 
 import javax.swing.JPanel;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.util.Arrays;
-import java.util.ArrayList;
+import java.awt.*;
+import java.util.*;
 
 
 public class GraphPanel extends JPanel
@@ -24,22 +19,19 @@ public class GraphPanel extends JPanel
 			this.data = data;
 		}
 		this.width = 10;
-		graph = new ArrayList<Rectangle> ();
+		graph = new ArrayList<Rectangle>();
 		
 		this.setMinimumSize(new Dimension(250, 250));
-		
-		
 	}
 	
 	@Override
 	protected void paintComponent(Graphics basic)
 	{
 		graph.clear();
-		this.setBackground(new Color(138, 43, 226));
+		this.setBackground(new Color(128, 43, 226));
 		if(this != null)
 		{
-			width = this.getWidth()/data.length;
-		
+			width = this.getWidth() / data.length;
 		}
 		for(int index = 0; index < data.length; index++)
 		{
@@ -51,10 +43,10 @@ public class GraphPanel extends JPanel
 		Graphics2D drawing = (Graphics2D) basic;
 		for(Rectangle current : graph)
 		{
-			int red = (int) (Math.random() * 256);
-			int green = (int) (Math.random() * 256);
-			int blue = (int) (Math.random() * 256);
 			int alpha = (int) (Math.random() * 256);
+			int red = (int) (Math.random() * 256);
+			int blue = (int) (Math.random() * 256);
+			int green = (int) (Math.random() * 256);
 			Color random = new Color(red, green, blue, alpha);
 			drawing.setColor(random);
 			drawing.fill(current);
@@ -72,5 +64,4 @@ public class GraphPanel extends JPanel
 		Arrays.sort(data);
 		repaint();
 	}
-	
 }

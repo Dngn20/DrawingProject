@@ -16,6 +16,7 @@ public class DrawingPanel extends JPanel
 	private JButton rectButton;
 	private JButton circButton;
 	private JButton elliButton;
+	private GraphPanel graphPanel;
 	private JButton triButton;
 	private JButton polyButton;
 	private JButton resetButton;
@@ -29,6 +30,7 @@ public class DrawingPanel extends JPanel
 		this.baseController = baseController;
 		this.shapePanel = new ShapePanel(baseController);
 		this.baseLayout = new SpringLayout();
+		this.graphPanel = new GraphPanel(setupArray());
 		this.title = new JLabel("Making art!");
 		this.rectButton = new JButton("Draw [] Rectangles");
 		this.circButton = new JButton("Draw o Circles");
@@ -58,6 +60,7 @@ public class DrawingPanel extends JPanel
 		this.add(elliButton);
 		this.add(triButton);
 		this.add(polyButton);
+		this.add(graphPanel);
 		this.add(resetButton);
 		this.add(title);
 	}
@@ -67,6 +70,8 @@ public class DrawingPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.NORTH, shapePanel, 0, SpringLayout.NORTH, title);
 		baseLayout.putConstraint(SpringLayout.NORTH, title, 10, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, title, 20, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.WEST, graphPanel, 0, SpringLayout.WEST, rectButton);
+		baseLayout.putConstraint(SpringLayout.EAST, graphPanel, 0, SpringLayout.EAST, rectButton);
 		baseLayout.putConstraint(SpringLayout.EAST, shapePanel, -10, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, polyButton, 318, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, triButton, 0, SpringLayout.WEST, polyButton);
@@ -74,6 +79,8 @@ public class DrawingPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, polyButton, 0, SpringLayout.WEST, title);
 		baseLayout.putConstraint(SpringLayout.WEST, rectButton, 0, SpringLayout.WEST, circButton);
 		baseLayout.putConstraint(SpringLayout.SOUTH, rectButton, -20, SpringLayout.NORTH, circButton);
+		baseLayout.putConstraint(SpringLayout.NORTH, graphPanel, 22, SpringLayout.SOUTH, polyButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, graphPanel, 189, SpringLayout.SOUTH, polyButton);
 		baseLayout.putConstraint(SpringLayout.WEST, circButton, 0, SpringLayout.WEST, elliButton);
 		baseLayout.putConstraint(SpringLayout.SOUTH, circButton, -24, SpringLayout.NORTH, elliButton);
 		baseLayout.putConstraint(SpringLayout.WEST, elliButton, 0, SpringLayout.WEST, triButton);
@@ -130,6 +137,21 @@ public class DrawingPanel extends JPanel
 			{
 				shapePanel.reset();
 			}
+	
 		});
 	}
+	
+	public int [] setupArray()
+	{
+		int length = (int) (Math.random() * 10) + 3;
+		int [] randomArray = new int[length];
+		for(int index = 0; index < length; index++)
+		{
+			randomArray [index] = (int) (Math.random() * 50) + 3;
+		}
+		return randomArray;
+		
+	}
+	
+	
 }
